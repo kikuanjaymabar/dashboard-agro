@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+import numpy as np
 import time
 from datetime import datetime
 
@@ -16,12 +18,12 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 
-header_col1, header_col2, header_col3 = st.columns([1,2,3])
+header_col1, header_col2, header_col3 = st.columns([1, 3, 1])
 with header_col1:
     st.markdown("### MES")
 with header_col3:
     st.markdown("SYSTEM ONLINE")
-st.devider()
+st.divider()
 
 st.title("Dashboard Penjadwalan Produksi Agroindustri")
 st.caption("Prototipe MES untuk optimasi penjadwalan produksi bahan baku mudah rusak")
@@ -30,20 +32,20 @@ st.sidebar.header("Input Parameter")
 mesin = st.sidebar.slider("Jumlah Mesin", 1, 10, 3)
 pesanan = st.sidebar.slider("Jumlah Pesanan", 5, 50, 10)
 masa_simpan = st.sidebar.number_input("Masa Simpan Bahan (jam)", 1, 24, 6)
-populasi = st.sidebar.slider("Ukuran Populasi GA", 10,200, 50)
-geerasi = st.sidebar.slider("Jumlah Generasi GA", 10, 500, 100)
+populasi = st.sidebar.slider("Ukuran Populasi GA", 10, 200, 50)
+generasi = st.sidebar.slider("Jumlah Generasi GA", 10, 500, 100)
 
 if pesanan > 20 and mesin < 3:
-    st.warning("Bebam produksi tinggi. Pertimbangan tambah mesin.")
+    st.warning("Beban produksi tinggi. Pertimbangkan tambah mesin.")
 else:
-    st.succes("Kapasitas produksi memadai.")
+    st.success("Kapasitas produksi memadai.")
 
 tab1, tab2, tab3, tab4 = st.tabs(["Dashboard", "Penjadwalan", "Analitik", "Pengaturan"])
 
 with tab1:
     st.subheader("Ringkasan Kinerja")
-    kpi1, kpi2, kpi3,kpi4 = st.columns(4)
-    with kpi:
+    kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+    with kpi1:
         st.markdown('<div class="kpi-card"><div class="kpi-label">MAKESPAN</div><div class="kpi-value">9 jam</div><div class="kpi-delta-up">Turun 2 jam vs Manual</div></div>', unsafe_allow_html=True)
     with kpi2:
         st.markdown('<div class="kpi-card"><div class="kpi-label">BAHAN RUSAK</div><div class="kpi-value">0 kg</div><div class="kpi-delta-up">Turun 5 kg vs Manual</div></div>', unsafe_allow_html=True)
@@ -54,33 +56,27 @@ with tab1:
 
 with tab2:
     st.subheader("Gantt Chart Penjadwalan Produksi")
-if st.button("Jalankan Algoritma Genetika"):
-with st.spinner("Menjalankan GA..."):
-    time.sleep(2)
-st.success("GA berhasil dijalankan!")
-
-if st.sidebar.button("Jalankan Algoritma Genetika"):
-with st.spinner("Menjalankan GA..."):
-time.sleep(2)
-
-st.success("GA berhasil dijalankan!")
-
-data = pd.DataFrame({
-"Mesin": ["Mesin 1", "Mesin 1", "Mesin 2", "Mesin 2", "Mesin 3"],
-"Pesanan": ["P3", "P7", "P5", "P2", "P4"],
-"Mulai": [0, 4, 0, 5, 0],
-"Selesai": [4, 8, 5, 9, 6]
-})
-base_date = pd.Timestamp("2024-01-01")
-data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
-data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
-
-fig = px.timeline(data, x_start="Mulai", x_end="Selesai", y="Mesin", color="Pesanan")
-fig.update_yaxes(autorange="reversed")
-st.plotly_chart(fig, use_container_width=True)
-
-csv = data.to_csv(index=False).encode("utf-8")
-st.download_button("Download Jadwal (CSV)", csv, "jadwal.csv", "text/csv")
+    if st.button("Jalankan Algoritma Genetika"):
+        with st.spinner("Menjalankan GA..."):
+            time.sleep(2)
+        st.success("GA berhasil dijalankan!")
+        
+        data = pd.DataFrame({
+            "Mesin": ["Mesin 1", "Mesin 1", "Mesin 2", "Mesin 2", "Mesin 3"],
+            "Pesanan": ["P3", "P7", "P5", "P2", "P4"],
+            "Mulai": [0, 4, 0, 5, 0],
+            "Selesai": [4, 8, 5, 9, 6]
+        })
+        base_date = pd.Timestamp("2024-01-01")
+        data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
+        data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
+        
+        fig = px.timeline(data, x_start="Mulai", x_end="Selesai", y="Mesin", color="Pesanan")
+        fig.update_yaxes(autorange="reversed")
+        st.plotly_chart(fig, use_container_width=True)
+        
+        csv = data.to_csv(index=False).encode("utf-8")
+        st.download_button("Download Jadwal (CSV)", csv, "jadwal.csv", "text/csv")
 
 with tab3:
     st.subheader("Konvergensi Algoritma Genetika")
@@ -99,18 +95,3 @@ with tab4:
     st.write("Metode Crossover: Order Crossover")
     st.write("Metode Mutasi: Swap Mutation")
     st.caption("Terakhir diperbarui: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    base_date = pd.Timestamp("2024-01-01")
-    data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
-    data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Makespan", "9 jam", "-2 jam vs Manual")
-    with col2:
-        st.metric("Bahan Rusak", "0 kg", "-5 kg vs Manual")
-    
-    fig = px.timeline(data, x_start="Mulai", x_end="Selesai", y="Mesin", color="Pesanan")
-    fig.update_yaxes(autorange="reversed")
-    st.plotly_chart(fig, use_container_width=True)
-else:
-    st.info("Klik 'Jalankan Algoritma Genetika' di sidebar untuk memulai.")

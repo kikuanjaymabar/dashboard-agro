@@ -54,33 +54,33 @@ with tab1:
 
 with tab2:
     st.subheader("Gantt Chart Penjadwalan Produksi")
-    if st.button("Jalankan Algoritma Genetika"):
-        with st.spinner("Menjalankan GA..."):
-            time.sleep(2)
-        st.success("GA berhasil dijalankan!")
+if st.button("Jalankan Algoritma Genetika"):
+with st.spinner("Menjalankan GA..."):
+    time.sleep(2)
+st.success("GA berhasil dijalankan!")
 
 if st.sidebar.button("Jalankan Algoritma Genetika"):
-    with st.spinner("Menjalankan GA..."):
-        time.sleep(2)
-    
-    st.success("GA berhasil dijalankan!")
-    
-    data = pd.DataFrame({
-        "Mesin": ["Mesin 1", "Mesin 1", "Mesin 2", "Mesin 2", "Mesin 3"],
-        "Pesanan": ["P3", "P7", "P5", "P2", "P4"],
-        "Mulai": [0, 4, 0, 5, 0],
-        "Selesai": [4, 8, 5, 9, 6]
-    })
-    base_date = pd.Timestamp("2024-01-01")
-    data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
-    data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
-        
-        fig = px.timeline(data, x_start="Mulai", x_end="Selesai", y="Mesin", color="Pesanan")
-        fig.update_yaxes(autorange="reversed")
-        st.plotly_chart(fig, use_container_width=True)
-        
-        csv = data.to_csv(index=False).encode("utf-8")
-        st.download_button("Download Jadwal (CSV)", csv, "jadwal.csv", "text/csv")
+with st.spinner("Menjalankan GA..."):
+time.sleep(2)
+
+st.success("GA berhasil dijalankan!")
+
+data = pd.DataFrame({
+"Mesin": ["Mesin 1", "Mesin 1", "Mesin 2", "Mesin 2", "Mesin 3"],
+"Pesanan": ["P3", "P7", "P5", "P2", "P4"],
+"Mulai": [0, 4, 0, 5, 0],
+"Selesai": [4, 8, 5, 9, 6]
+})
+base_date = pd.Timestamp("2024-01-01")
+data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
+data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
+
+fig = px.timeline(data, x_start="Mulai", x_end="Selesai", y="Mesin", color="Pesanan")
+fig.update_yaxes(autorange="reversed")
+st.plotly_chart(fig, use_container_width=True)
+
+csv = data.to_csv(index=False).encode("utf-8")
+st.download_button("Download Jadwal (CSV)", csv, "jadwal.csv", "text/csv")
 
 with tab3:
     st.subheader("Konvergensi Algoritma Genetika")

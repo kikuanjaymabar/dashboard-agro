@@ -26,7 +26,7 @@ data = pd.DataFrame({
     'Selesai': [4, 8, 5, 9, 6]
 })
 
-  col1, col2 =st.columns(2)
+  col1, col2 = st.columns(2)
   with col1:
       st.metric("Makespan", "9 jam", "-2 jam vs Manual")
   with cold2:

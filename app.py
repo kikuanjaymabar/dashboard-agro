@@ -38,7 +38,7 @@ if pesanan > 20 and mesin < 3:
 else:
     st.succes("Kapasitas produksi memadai.")
 
-tab1, tab2, tab3, tab4 = st.tabs(["Dashboard". "Penjadwalan", "Analitik", "Pengaturan])
+tab1, tab2, tab3, tab4 = st.tabs(["Dashboard", "Penjadwalan", "Analitik", "Pengaturan"])
 
 with tab1:
     st.subheader("Ringkasan Kinerja")

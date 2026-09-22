@@ -71,7 +71,7 @@ if st.sidebar.button("Jalankan Algoritma Genetika"):
         "Mulai": [0, 4, 0, 5, 0],
         "Selesai": [4, 8, 5, 9, 6]
     })
-        base_date = pd.Timestamp("2024-01-01")
+    base_date = pd.Timestamp("2024-01-01")
         data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
         data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
         

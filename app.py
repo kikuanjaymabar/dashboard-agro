@@ -24,7 +24,7 @@ with header_col3:
 st.devider()
 
 st.title("Dashboard Penjadwalan Produksi Agroindustri")
-st.caption(Prototipe MES untuk optimasi penjadwalan produksi bahan baku mudah rusak")
+st.caption("Prototipe MES untuk optimasi penjadwalan produksi bahan baku mudah rusak")
 
 st.sidebar.header("Input Parameter")
 mesin = st.sidebar.slider("Jumlah Mesin", 1, 10, 3)

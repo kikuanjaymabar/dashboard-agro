@@ -6,20 +6,15 @@ from datetime import datetime
 
 st.set_page_config(layout="wide", page_title="MES Dashboard")
 
-st.markdown (""
+css = """
 <style>
-.kpi-card {
-    background : linear-gradient(135deg, #1E2530, #2A3441);
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 4px solid #00D4FF;
-    margin-bottom: 10px;
-}
+.kpi-card { background: linear-gradient(135deg, #1E2530, #2A3441); padding: 20px; border-radius: 12px; border-left: 4px solid #00D4FF; margin-bottom: 10px; }
 .kpi-label { color: #8B95A5; font-size: 13px; letter-spacing: 1px; }
-.kpi-value { color: #FAFAFA; font-size: 32px; font weight: bold; }
+.kpi-value { color: #FAFAFA; font-size: 32px; font-weight: bold; }
 .kpi-delta-up { color: #00FF88; font-size: 13px; }
 </style>
-"", unsafe_allow_html=True)
+"""
+st.markdown(css, unsafe_allow_html=True)
 
 header_col1, header_col2, header_col3 = st.columns([1,2,3])
 with header_col1:

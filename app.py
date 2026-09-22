@@ -13,7 +13,7 @@ mesin = st.sidebar.slider("Jumlah Mesin", 1, 10, 3, )
 pesanan = st.sidebar.slider("Jumlah Pesanan", 5, 50, 10)
 masa_simpan = st.sidebar.number_input("Masa Simpan Bahan (jam)", 1, 24, 6)
 
-if st.sidebar.button.button("Jalankan Algoritma")
+if st.sidebar.button("Jalankan Algoritma"):
   with st.spinner("Menjalankan GA...") :
     time.sleep(2)
 

@@ -72,8 +72,8 @@ if st.sidebar.button("Jalankan Algoritma Genetika"):
         "Selesai": [4, 8, 5, 9, 6]
     })
     base_date = pd.Timestamp("2024-01-01")
-        data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
-        data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
+    data["Mulai"] = base_date + pd.to_timedelta(data["Mulai"], unit="h")
+    data["Selesai"] = base_date + pd.to_timedelta(data["Selesai"], unit="h")
         
         fig = px.timeline(data, x_start="Mulai", x_end="Selesai", y="Mesin", color="Pesanan")
         fig.update_yaxes(autorange="reversed")

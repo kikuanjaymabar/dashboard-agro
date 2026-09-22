@@ -10,7 +10,7 @@ st.markdown("Prototipe MES untuk optimasi pendjadwalan produksi bahan baku mudah
 
 st.sidebar.header("Input Parameter")
 mesin = st.sidebar.slider("Jumlah Mesin", 1, 10, 3, )
-pesanan = st.sidebar.slider(""Jumlah Pesanan", 5, 50, 10)
+pesanan = st.sidebar.slider("Jumlah Pesanan", 5, 50, 10")
 masa_simpan = st.sidebar.number_input("Masa Simpan Bahan (jam)", 1, 24, 6)
 
 if st.sidebar.button.button("Jalankan Algoritma")

@@ -19,12 +19,12 @@ if st.sidebar.button.button("Jalankan Algoritma")
 
   st.succes ("GA berhasil dijalankan!")
 
-  data = pd.DataFrame ({
-      'Mesin': [Mesin 1', 'Mesin 1', 'Mesin 2', 'Mesin 2', 'Mesin 3'],
-      'Pesanan': ['P3','P7','P5','P2','P4'],
-      'Mulai': [0,4,0,5,0],
-      'Selesai' : [4,8,5,9,6]
-  })
+data = pd.DataFrame({
+    "Mesin": ["Mesin 1", "Mesin 1", "Mesin 2", "Mesin 2", "Mesin 3"],
+    'Pesanan': ['P3', 'P7', 'P5', 'P2', 'P4'],
+    'Mulai': [0, 4, 0, 5, 0],
+    'Selesai': [4, 8, 5, 9, 6]
+})
 
   col1, col2 =st.columns(2)
   with col1:
